@@ -8,7 +8,7 @@
      
 \sloppy
 
-\title{Análise de Celulas Cervicais}
+\title{Análise de Células Cervicais}
 
 \author{Francisco Gleidson Nascimento de Queiroz\inst{1} }
 
@@ -22,54 +22,43 @@
 \maketitle
 
 \begin{abstract}
-  This meta-paper describes the style to be used in articles and short papers
-  for SBC conferences. For papers in English, you should add just an abstract
-  while for the papers in Portuguese, we also ask for an abstract in
-  Portuguese (``resumo''). In both cases, abstracts should not have more than
-  10 lines and must be in the first page of the paper.
+  There are several challenges related to the segmentation of cervical cell images. This article seeks to analyze some of these problems, seeking a better approach for segmentation and detection of nuclei in images from exams with these cells.
 \end{abstract}
      
 \begin{resumo} 
-  Este meta-artigo descreve o estilo a ser usado na confecção de artigos e
-  resumos de artigos para publicação nos anais das conferências organizadas
-  pela SBC. É solicitada a escrita de resumo e abstract apenas para os artigos
-  escritos em português. Artigos em inglês deverão apresentar apenas abstract.
-  Nos dois casos, o autor deve tomar cuidado para que o resumo (e o abstract)
-  não ultrapassem 10 linhas cada, sendo que ambos devem estar na primeira
-  página do artigo.
+  Existem diversos desafios relacionados a segmentação de imagens de células cervicais. Este artigo busca analisar alguns destes problemas buscando uma melhor abordagem para a segmentação e detecção de núcleos em imagens de exames com estas células.
 \end{resumo}
 
 
-\section{General Information}
+\section{Introdução}
 
-All full papers and posters (short papers) submitted to some SBC conference,
-including any supporting documents, should be written in English or in
-Portuguese. The format paper should be A4 with single column, 3.5 cm for upper
-margin, 2.5 cm for bottom margin and 3.0 cm for lateral margins, without
-headers or footers. The main font must be Times, 12 point nominal size, with 6
-points of space before each paragraph. Page numbers must be suppressed.
+A quantiﬁcação das propriedades de células cervicais tem sido utilizada na detecção de lesões pré-cancerígenas do colo do útero. A abordagem tradicional se baseia na busca visual em lâminas do exame Papanicolau, o objetivo é encontrar padrões que sejam correlacionados com células anormais. O maior desaﬁo nesse caso é a inspeção manual, uma tarefa que não atenderá a demanda de acordo com o crescimento da população \cite{silva2018detecccao}.
 
-Full papers must respect the page limits defined by the conference.
-Conferences that publish just abstracts ask for \textbf{one}-page texts.
+Um dos tipos mais comuns de câncer entre as mulheres é o  câncer cervical, com cerca de 527.000 novos casos a cada ano  em todo o mundo, e quase 80\% desse casos ocorrem em países com baixa renda. Este câncer foi responsável pela morte de265.000 mulheres em 2012, e 87\% dessas mortes ocorreramem países em desenvolvimento \cite{ramalho2015cell}. O núcleo possui várias informações para detecção de anomalias sendo de fundamental importância sua análise e assim o desenvolvimento de ferramentas computacionais  afim de que a análise possa ser consistente reduzindo principalmentede resultados falsos negativos.
 
-\section{First Page} \label{sec:firstpage}
+\section{Fundamentação Teórica} \label{sec:firstpage}
 
-The first page must display the paper title, the name and address of the
-authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
-required only for papers written in Portuguese). The title must be centered
-over the whole page, in 16 point boldface font and with 12 points of space
-before itself. Author names must be centered in 12 point font, bold, all of
-them disposed in the same line, separated by commas and with 12 points of
-space after the title. Addresses must be centered in 12 point font, also with
-12 points of space after the authors' names. E-mail addresses should be
-written using font Courier New, 10 point nominal size, with 6 points of space
-before and 6 points of space after.
+O autor propôs uma segmentação automática utilizando o método de múltiplas células cervicais sobrepostas em microimagens
+escópicas com partição de superpixel e célula refinamento de contorno. Primeiramente para determinar a área de busca, 
+as massas celulares são detectadas através da geração de superpixel e \textit{adaptive triangle thresholding}. Para definir
+a posição da célula, núcleos das células são extraídas por limite local baseado em janela – remoção
+e remoção de valores discrepantes. Finalmente, para delimitar o limite áreas das células sobrepostas, o citoplasma da célula é segmentado e particionado por superpixel e refinamento de contorno em nível celular. Experimentos mostraram
+que o método apresentou resultados competitivos em dois conjuntos de dados de desafio público, com
+pareados aos métodos mais modernos. A principal contribuição é o particionamento de superpixel e no refinamento de contorno em
+segmentação do citoplasma celular, o que aumenta a precisão de sobreposição de limites de células para o nível de última geração por
+desempenho \cite{lee2016segmentation}.
 
-The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
-indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
-should be written in boldface and must precede the text.
+O autor se concentrou na extração de limites individuais do citoplasma e dos núcleos de sobreposição cervical em
+imagens citológicas adquiridas em diferentes planos focais (\textbf{FOV}). O método difere de outras abordagens, pois processa não apenas a profundidade extensa de representação de imagem de campo (\textbf{EDF}), mas também nas imagens \textbf{FOV} para encontrar as bordas de citoplasmas sobrepostos. Foram combinados algoritmos interligados para fornecer um eficiente \textit{pipeline} para núcleo automatizado e segmentação de citoplasma: superpixel combinado com diagramas de \textbf{Voronoi} ou \textbf{SPVD}, seguido por algoritmos usando cálculo de variações para construir mapas de borda, processados usando métodos morfológicos matemáticos, reconstrução aliada à elipse detectoras e, finalmente, fornecer um limite de citoplasma refinado As avaliações dos conjuntos de dados mostram desempenhos qualitativos e quantitativos, usando um programa de computador completamente automatizado. O desempenho quantitativo apresenta Coeficiente de Dados médio superior a 87\% \cite{ramalho2015cell}.
 
-\section{CD-ROMs and Printed Proceedings}
+O autor apresentou ferramentas para classiﬁcação de células e recuperação de imagens, incluindo o descritor de atributos radiais (\textit{Radial Feature Descriptor} - \textbf{RFD}) para categorizar padrões normais e anormais de células cervicais. O \textbf{RFD} deﬁne retas igualmente espaçadas ao redor do núcleo que são responsáveis por capturar variações de intensidade na membrana citoplasmática. Ele combina os atributos de intensidade com atributos de textura provenientes do cálculo da distribuição de cromatina no núcleo sem a necessidade de segmentação do citoplasma. Para avaliar os resultados foram utilizadas duas bases de imagens: \textbf{Herlev}, uma base pública; e \textbf{CRIC} uma base de imagens apresentadas na tese. As células individuais da base \textbf{CRIC} foram obtidas pelo uso de um algoritmo de segmentação de núcleos proposto. Foi realizado experimentos de classiﬁcação de imagens e de recuperação de imagens baseada em conteúdo (\textit{Content-Based Image Retrieval} - \textbf{CBIR}). As células com o algoritmo \textit{Random Forest} foram classificadas utilizando a metodologia bootstrap para criar os conjuntos de treinamento e teste. Os experimentos \textbf{CBIR} foram realizados utilizando a distância cosseno como métrica de similaridade. As principais contribuições foram: um novo método para segmentação de núcleos de células cervicais; \textbf{RFD}, um extrator de atributos de células cervicais; \textbf{pyCBIR}, uma nova ferramenta para recuperação de imagens. Os experimentos de classiﬁcação foram mensurados em termos do índice \textit{Kappa} (\textbf{k}) e da taxa de falso negativos (\textit{False Negative Rate} - \textbf{FNR}), foi calculado o \textit{Mean Average Precision} (\textbf{MAP}) para avaliar os experimentos CBIR \cite{silva2018detecccao}.
+
+O autor buscou verificar uma melhor abordagem para a detecção precoce de câncer na análise de imagens provenientes de lâminas de cavidade oral coradas com Papanicolau. Ele comparou os métodos de \textit{Deep Learning} para segmentação e detecção de objetos para localização de núcleos em imagens provenientes de lâminas de três diferentes pacientes. O melhor resultado indica um \textbf{IoU} de 0,59 para a segmentação e 0,81 para a detecção de objetos. Os resultados mostraram que a detecção de objetos usando o modelo \textit{Faster R}-\textbf{CNN} possui potencial de ser usado juntamente com um modelo de classificação de imagens para auxiliar na detecção precoce de câncer \cite{matias2021localizaccao}.
+
+O autor propõe um método baseado em Redes Neurais Convolucionais para detectar automaticamente os núcleos de células cervicais. Após ser realizado o treinamento com um conjunto de dados disponibilizados pelo \textit{Overlapping Cervical Cytology Image Segmentation Challenge} - \textbf{ISBI 2014}, suas camadas completamente conectadas são convertidas em camadas convolucionais para permitir o processamento de imagens de qualquer tamanho. Os resultados obtidos foram comparados com os de outros participantes do \textbf{ISBI 2014} e também com trabalhos que utilizaram o mesmo conjunto de dados. Os resultados experimentais indicaram que a metodologia proposta provê uma detecção de núcleos com métricas de precisão e \textit{recall} comparáveis com os métodos do estado da arte em detecção de núcleos de células cervicais. Em casos que o tempo de processamento não seja um limitador, utilizando técnicas de morfologia matemática é possível melhorar ainda mais os resultados \cite{braz2018detecccao}.
+
+
+\section{Metodologia}
 
 In some conferences, the papers are published on CD-ROM while only the
 abstract is published in the printed Proceedings. In this case, authors are
@@ -77,7 +66,7 @@ invited to prepare two final versions of the paper. One, complete, to be
 published on the CD and the other, containing only the first page, with
 abstract and ``resumo'' (for papers in Portuguese).
 
-\section{Sections and Paragraphs}
+\section{Conclusões}
 
 Section titles must be in boldface, 13pt, flush left. There should be an extra
 12 pt of space before each title. Section numbering is optional. The first
@@ -88,7 +77,6 @@ subsequent paragraphs should be indented by 1.27 cm.
 
 The subsection titles must be in boldface, 12pt, flush left.
 
-\section{Figures and Captions}\label{sec:figs}
 
 
 Figure and table captions should be centered if less than one line
@@ -127,8 +115,6 @@ space before and after each caption.
 \includegraphics[width=.7\textwidth]{table.jpg}
 \end{table}
 
-\section{Images}
-
 All images and illustrations should be in black-and-white, or gray tones,
 excepting for the papers that will be electronically available (on CD-ROMs,
 internet, etc.). The image resolution on paper should be about 600 dpi for
@@ -136,7 +122,7 @@ black-and-white images, and 150-300 dpi for grayscale images.  Do not include
 images with excessive resolution, as they may take hours to print, without any
 visible difference in the result. 
 
-\section{References}
+\section{Referências Bibliográficas}
 
 Bibliographic references must be unambiguous and uniform.  We recommend giving
 the author names references in brackets, e.g. \cite{knuth:84},
