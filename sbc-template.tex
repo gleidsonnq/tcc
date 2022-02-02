@@ -8,9 +8,9 @@
      
 \sloppy
 
-\title{Análise de Células Cervicais}
+\title{Ranking de agrupamento de Células em imagens de exames de Papanicolau}
 
-\author{Francisco Gleidson Nascimento de Queiroz\inst{1} }
+\author{Francisco Gleidson Nascimento de Queiroz\inst{1} Daniel Silva Ferreira\inst{2} }
 
 
 \address{Departamento de Computação\\Instituto Federal de Educação, Ciência e Tecnologia do Ceará(IFCE)\\
@@ -22,11 +22,11 @@
 \maketitle
 
 \begin{abstract}
-  There are several challenges related to the segmentation of cervical cell images. This article seeks to analyze some of these problems, seeking a better approach for segmentation and detection of nuclei in images from exams with these cells.
+  There are several challenges related to the segmentation of cervical cell images. This article seeks to estimate the density of a group of cells, considering that specialists tend to observe cell fields with less overlaps, seeking a better approach for segmentation and detection of nuclei in images of exams with these cells.
 \end{abstract}
      
 \begin{resumo} 
-  Existem diversos desafios relacionados a segmentação de imagens de células cervicais. Este artigo busca analisar alguns destes problemas buscando uma melhor abordagem para a segmentação e detecção de núcleos em imagens de exames com estas células.
+  Existem diversos desafios relacionados a segmentação de imagens de células cervicais. Este artigo busca estimar a densidade de um grupo de células, considerando que especialistas tendem a observar campos celulares com menos sobreposições, buscando uma melhor abordagem para a segmentação e detecção de núcleos em imagens de exames com estas células.
 \end{resumo}
 
 
@@ -35,6 +35,10 @@
 A quantiﬁcação das propriedades de células cervicais tem sido utilizada na detecção de lesões pré-cancerígenas do colo do útero. A abordagem tradicional se baseia na busca visual em lâminas do exame Papanicolau, o objetivo é encontrar padrões que sejam correlacionados com células anormais. O maior desaﬁo nesse caso é a inspeção manual, uma tarefa que não atenderá a demanda de acordo com o crescimento da população \cite{silva2018detecccao}.
 
 Um dos tipos mais comuns de câncer entre as mulheres é o  câncer cervical, com cerca de 527.000 novos casos a cada ano  em todo o mundo, e quase 80\% desse casos ocorrem em países com baixa renda. Este câncer foi responsável pela morte de265.000 mulheres em 2012, e 87\% dessas mortes ocorreramem países em desenvolvimento \cite{ramalho2015cell}. O núcleo possui várias informações para detecção de anomalias sendo de fundamental importância sua análise e assim o desenvolvimento de ferramentas computacionais  afim de que a análise possa ser consistente reduzindo principalmentede resultados falsos negativos.
+
+Trabalhos recentes têm mostrado que algoritmos de segmentação funcionam de forma diferente dependendo do nível de sobreposição celular da imagem processada. Então identificar a densidade dos agrupamentos de células cervicais e criar um ranking das densidades pode ajudar na identificação do nível de sobreposição celular destes agrupamentos.
+
+Para tentar estimar a densidade de um grupo de células inicialmente iremos estimar a densidade de células cervicas em um agrupamento utilizando a distância entre núcleos, pois a segmentação em agrupamentos densos é complexa.
 
 \section{Fundamentação Teórica} \label{sec:firstpage}
 
@@ -60,11 +64,7 @@ O autor propõe um método baseado em Redes Neurais Convolucionais para detectar
 
 \section{Metodologia}
 
-In some conferences, the papers are published on CD-ROM while only the
-abstract is published in the printed Proceedings. In this case, authors are
-invited to prepare two final versions of the paper. One, complete, to be
-published on the CD and the other, containing only the first page, with
-abstract and ``resumo'' (for papers in Portuguese).
+Iremos definir alguns passos, no primeiro passo vamos detectar os agrupamentos celulares, no segundo passo detectar a quantidade de núcleos em cada grupo, no terceiro passo calcular métrica de distância entre os núcleos e por fim comparar o ranking obtido com o ranking computado a partir do GT.
 
 \section{Conclusões}
 
